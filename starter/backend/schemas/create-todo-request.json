@@ -1,0 +1,21 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "Create todo request schema",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "minLength": 3,
+      "pattern": "^.*[a-zA-Z0-9]+.*$"
+    },
+    "dueDate": {
+      "type": "string",
+      "minLength": 10
+    }
+  },
+  "required": [
+    "name",
+    "dueDate"
+  ],
+  "additionalProperties": false
+}
