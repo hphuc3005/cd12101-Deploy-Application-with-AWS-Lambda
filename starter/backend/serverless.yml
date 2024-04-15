@@ -4,6 +4,7 @@ service: serverless-todo-app
 
 plugins:
   - serverless-iam-roles-per-function
+  - serverless-reqvalidator-plugin
 
 frameworkVersion: "3"
 
@@ -56,6 +57,7 @@ functions:
           path: todos
           cors: true
           authorizer: Auth
+          reqValidatorName: xMyRequestValidator
           request:
             schema:
               application/json: ${file(schemas/create-todo-request.json)}
@@ -73,6 +75,7 @@ functions:
           path: todos/{todoId}
           cors: true
           authorizer: Auth
+          reqValidatorName: xMyRequestValidator
           request:
             schema:
               application/json: ${file(schemas/update-todo-request.json)}
@@ -115,5 +118,7 @@ functions:
         Resource: arn:aws:dynamodb:${self:provider.region}:*:table/${self:provider.environment.TODOS_TABLE}
 
 resources:
+  - ${file(./resources/api-gw.yaml)}
+  - ${file(./resources/xreqvalidator.yaml)}
   - ${file(./resources/dynamodb.yaml)}
   - ${file(./resources/s3-bucket.yaml)}

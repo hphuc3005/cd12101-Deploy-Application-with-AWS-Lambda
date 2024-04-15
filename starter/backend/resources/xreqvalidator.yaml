@@ -1,0 +1,9 @@
+Resources:
+  xMyRequestValidator:
+    Type: AWS::ApiGateway::RequestValidator
+    Properties:
+      Name: "my-req-validator"
+      RestApiId:
+        Ref: ApiGatewayRestApi
+      ValidateRequestBody: true
+      ValidateRequestParameters: false

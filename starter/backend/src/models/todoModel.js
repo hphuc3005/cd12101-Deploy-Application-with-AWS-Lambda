@@ -47,6 +47,10 @@ export class TodoModel {
   async createTodo(userId, data) {
     logger.info("Creating todo data", { userId: userId, data: data })
     const itemId = uuidv4()
+    const name = data?.name
+    if (!name) {
+      throw new Error("Todo name is required!!!")
+    }
     const item = {
       todoId: itemId,
       userId: userId,
@@ -68,6 +72,10 @@ export class TodoModel {
 
   async updateTodo(userId, todoId, data) {
     logger.info("Updating todo data", { userId: userId, todoId: todoId, data: data })
+    const name = data?.name
+    if (!name) {
+      throw new Error("Todo name is required!!!")
+    }
     const params = {
       TableName: this.tableName,
       Key: {
